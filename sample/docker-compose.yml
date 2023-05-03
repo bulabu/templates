@@ -1,0 +1,29 @@
+version: '3'
+services:
+  app:
+    build:
+      context: docker
+      dockerfile: ./app/app.Dockerfile
+    environment:
+      - mvnusername=${mvnusername}
+      - mvnpassword=${mvnpassword}
+      - aws_url=http://localstack_main:4566
+      - AWS_ACCESS_KEY_ID=dummy
+      - AWS_SECRET_ACCESS_KEY=dummy
+      - GRADLE_USER_HOME=/deps
+    volumes:
+      - .:/app
+      - ./deps:/deps
+    ports:
+      - "8080:8080"
+  localstack:
+    container_name: "localstack_main"
+    image: localstack/localstack
+    ports:
+      - "127.0.0.1:4566:4566"            # LocalStack Gateway
+      - "127.0.0.1:4510-4559:4510-4559"  # external services port range
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "/usr/local/localstack/volume:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"

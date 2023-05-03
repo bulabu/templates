@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd" xmlns="http://maven.apache.org/SETTINGS/1.1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <servers>
+    <server>
+      <id>m2central</id>
+      <username>${env.mvnusername}</username>
+      <password>${env.mvnpassword}}</password>
+    </server>
+    <server>
+      <id>snapshots</id>
+      <username>${env.mvnusername}</username>
+      <password>${env.mvnpassword}}</password> 
+   </server>
+    <server>
+      <id>remote-repos</id>
+      <username>${env.mvnusername}</username>
+      <password>${env.mvnpassword}}</password>    
+  </server>
+  </servers>
+  <mirrors>
+    <mirror>
+      <mirrorOf>central</mirrorOf>
+      <name>remote-repos</name>
+      <url>https://foundry.avisoapp.com/artifactory/remote-repos</url>
+      <id>remote-repos</id>
+    </mirror>
+  </mirrors>
+  <profiles>
+    <profile>
+      <repositories>
+        <repository>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <id>m2central</id>
+          <name>libs-release</name>
+          <url>https://foundry.avisoapp.com/artifactory/libs-release</url>
+        </repository>
+        <repository>
+          <snapshots />
+          <id>snapshots</id>
+          <name>libs-snapshot</name>
+          <url>https://foundry.avisoapp.com/artifactory/libs-snapshot</url>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <id>m2central</id>
+          <name>plugins-release</name>
+          <url>https://foundry.avisoapp.com/artifactory/plugins-release</url>
+        </pluginRepository>
+        <pluginRepository>
+          <snapshots />
+          <id>snapshots</id>
+          <name>plugins-snapshot</name>
+          <url>https://foundry.avisoapp.com/artifactory/plugins-snapshot</url>
+        </pluginRepository>
+      </pluginRepositories>
+      <id>artifactory</id>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <activeProfile>artifactory</activeProfile>
+  </activeProfiles>
+</settings>
+
