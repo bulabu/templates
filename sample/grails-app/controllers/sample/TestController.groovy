@@ -6,7 +6,6 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.model.CreateTableRequest;
 import software.amazon.awssdk.services.dynamodb.model.AttributeDefinition;
 import software.amazon.awssdk.services.dynamodb.model.ScalarAttributeType;
-import software.amazon.awssdk.services.dynamodb.model.ScalarAttributeType;
 import software.amazon.awssdk.services.dynamodb.model.KeySchemaElement;
 import software.amazon.awssdk.services.dynamodb.model.ProvisionedThroughput;
 import software.amazon.awssdk.services.dynamodb.model.KeyType;
@@ -21,10 +20,10 @@ class TestController {
     def test() {
         String awsurl = System.getenv("aws_url")
         testService.makeTest()
-        println(awsurl)
+        println(URI.create(awsurl))
         DynamoDbClient ddb = DynamoDbClient.builder()
-                .endpointOverride(URI.create(awsurl))
                 .region(Region.US_EAST_1)
+                .endpointOverride(URI.create(awsurl))
                 .build();
         createTable(ddb, "test", "test")
 
@@ -55,7 +54,7 @@ class TestController {
                 .tableName(tableName)
                 .build();
 
-        String newTable ="";
+        String newTable ="frdurgdxjh";
         try {
             CreateTableResponse response = ddb.createTable(request);
             DescribeTableRequest tableRequest = DescribeTableRequest.builder()
